@@ -23,4 +23,4 @@ app.patch("/api/admin/tests/:id",auth,adm,(req,res)=>{db.prepare("UPDATE tests S
 app.post("/api/admin/questions",auth,adm,(req,res)=>{let x=req.body;db.prepare("INSERT INTO questions(test_id,subject,q,a,b,c,d,correct,explanation) VALUES(?,?,?,?,?,?,?,?,?)").run(x.test_id,x.subject||"General",x.q,x.a,x.b,x.c,x.d,Number(x.correct),x.explanation||"");res.json({ok:true})});
 app.get("/api/admin/questions/:id",auth,adm,(req,res)=>res.json(db.prepare("SELECT * FROM questions WHERE test_id=? ORDER BY id").all(req.params.id)));
 app.delete("/api/admin/questions/:id",auth,adm,(req,res)=>{db.prepare("DELETE FROM questions WHERE id=?").run(req.params.id);res.json({ok:true})});
-app.get("*",(req,res)=>res.sendFile(path.join(__dirname,"public","index.html")));app.listen(PORT,()=>console.log("Sky Sparrk: http://localhost:"+PORT));
+app.get("*",(req,res)=>res.sendFile(path.join(__dirname,"public","index.html")));app.get("*",(req,res)=>res.sendFile(path.join(__dirname,"public","index.html")));app.listen(PORT,"0.0.0.0",()=>console.log("Sky Sparrk running on port "+PORT));
